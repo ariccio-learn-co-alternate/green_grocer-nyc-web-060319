@@ -18,7 +18,7 @@ def apply_coupons(cart, coupons)
       new_item = cart[coupon[:item]]
       new_item_name = "#{coupon[:item]} W/COUPON"
       binding.pry
-      if coupon[:num] > cart[coupon[:item]]
+      if coupon[:num] > cart[coupon[:item]][:count]
         cart[coupon[:item]] = {}
       else
         cart[coupon[:item]][:count] -= coupon[:num]
