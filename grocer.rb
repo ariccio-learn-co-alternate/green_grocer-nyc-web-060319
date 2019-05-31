@@ -17,6 +17,7 @@ def apply_coupons(cart, coupons)
     if cart.has_key?(coupon[:item])
       new_item = cart[coupon[:item]]
       new_item_name = "#{coupon[:item]} W/COUPON"
+      binding.pry
       if coupon[:num] > cart[coupon[:item]]
         cart[coupon[:item]] = {}
       else
