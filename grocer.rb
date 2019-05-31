@@ -1,9 +1,32 @@
+require "pry"
+
 def consolidate_cart(cart)
-  # code here
+  cart_out = {}
+  cart.each do |item|
+    if cart_out.has_key?(item.keys[0])
+      cart_out[item.keys[0]][:count] += 1
+    else
+      cart_out[item.keys[0]] = { :price => item[item.keys[0]][:price], :clearance => item[item.keys[0]][:clearance], :count => 1 }
+    end
+  end
+  cart_out
 end
 
 def apply_coupons(cart, coupons)
-  # code here
+  coupons.each do |coupon|
+    if cart.has_key?(coupon[:item])
+      new_item = cart[coupon[:item]]
+      new_item_name = "#{coupon[:item]} W/COUPON"
+      if coupon[:num] > cart[coupon[:item]]
+        cart[coupon[:item]] = {}
+      else
+        cart[coupon[:item]][:count] -= coupon[:num]
+      end
+      new_item[:price] = coupon[:cost]
+      new_item[:count] = 1
+      cart[new_item_name] = new_item
+    end
+  end
 end
 
 def apply_clearance(cart)
